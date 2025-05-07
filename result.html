@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection Metrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+    <h2 style="text-align:center;">Emotion Detection Model Metrics</h2>
+
+    <!-- Performance Metrics Table -->
+    <table class="metrics-table">
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Accuracy</td>
+            <td>{{ accuracy }}%</td>
+        </tr>
+        <tr>
+            <td>Precision</td>
+            <td>{{ precision }}</td>
+        </tr>
+        <tr>
+            <td>Recall</td>
+            <td>{{ recall }}</td>
+        </tr>
+        <tr>
+            <td>F1 Score</td>
+            <td>{{ f1_score }}</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- Confusion Matrix -->
+    <h3 style="text-align:center;">Confusion Matrix</h3>
+    <table class="metrics-table">
+        <tr>
+            <th>Actual \ Predicted</th>
+            {% for label in emotion_labels %}
+                <th>{{ label.capitalize() }}</th>
+            {% endfor %}
+        </tr>
+        {% for i in range(confusion_matrix|length) %}
+        <tr>
+            <th>{{ emotion_labels[i].capitalize() }}</th>
+            {% for j in range(confusion_matrix[i]|length) %}
+                <td>{{ confusion_matrix[i][j] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('index') }}" class="back-btn">← Back to Image Selection</a>
+</body>
+</html>

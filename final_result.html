@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .output-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        img {
+            max-width: 400px;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+        .download-btn, .back-btn, .metrics-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .metrics-btn:hover, .download-btn:hover, .back-btn:hover {
+            background-color: #0056b3;
+        }
+        .emotion-label {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Emotion Detection Result</h2>
+    <div class="output-section">
+        <img src="{{ url_for('static', filename='images/' + selected_image) }}" alt="Selected Image">
+        <div class="emotion-label">Predicted Emotion: {{ emotion.capitalize() }}</div>
+        <br>
+        <a href="{{ url_for('static', filename='images/' + selected_image) }}" download class="download-btn">Download Image</a>
+        <br><br>
+        <a href="{{ url_for('index') }}" class="back-btn">Go Back</a>
+        <a href="{{ url_for('view_metrics') }}" class="metrics-btn">View Model Metrics</a>
+    </div>
+</body>
+</html>

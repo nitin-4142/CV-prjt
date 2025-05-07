@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+    <h2>Select an Image for Emotion Detection</h2>
+
+    <!-- Form to select an image -->
+    <form method="POST" action="/">
+        <div>
+            {% for image in images %}
+                <label>
+                    <input type="radio" name="selected_image" value="{{ image }}" required>
+                    <img src="{{ url_for('static', filename='images/' + image) }}" alt="{{ image }}" width="100" style="margin:10px; border-radius: 10px;">
+                </label>
+            {% endfor %}
+        </div>
+        <button type="submit">Detect Emotion</button>
+    </form>
+
+    <!-- Show result -->
+    {% if selected_image %}
+    <div class="output-section">
+        <h2>Prediction Result</h2>
+        <img src="{{ url_for('static', filename='images/' + selected_image) }}" alt="Selected Image">
+        <p><strong>Predicted Emotion:</strong> {{ emotion }}</p>
+        <a href="{{ url_for('static', filename='images/' + selected_image) }}" download class="download-btn">Download Image</a>
+    </div>
+    {% endif %}
+</body>
+</html>
